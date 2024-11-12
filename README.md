@@ -32,8 +32,8 @@ The backend for Fabtix handles the core server-side logic, including performance
 
 ### Steps
 1. **Clone the repository**:
-   git clone https://github.com/mormorani/Fabtix-Backend.git
-   cd Fabtix-Backend
+   - git clone https://github.com/mormorani/Fabtix-Backend.git
+   - cd Fabtix-Backend
 2. **Install Dependencies**:
     npm install
 3. **Environment Variables**:
