@@ -16,9 +16,6 @@ router.post("/", async (req, res) => {
       return res.status(404).json({ message: "Performance not found" });
     }
 
-    // Generate a unique purchase token
-    // const purchaseToken = Math.random().toString(36).substr(2);
-
     // Create a new purchase record
     const newPurchase = new PurchaseModel({
     //   token: purchaseToken,
@@ -27,13 +24,6 @@ router.post("/", async (req, res) => {
     });
 
     const savedPurchase = await newPurchase.save();
-    // Set the token in a cookie with an expiration date (e.g., 30 days)
-    // res.cookie("purchaseToken", purchaseToken, {
-    //   maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    //   httpOnly: true, // Prevent JavaScript access
-    //   secure: true, // Only send over HTTPS
-    //   sameSite: "Strict", // Prevent CSRF attacks by restricting cross-site requests
-    // });
     // Respond to the client with the purchase details
     res.status(200).json({ message: "Purchase successful", savedPurchase });
   } catch (error) {

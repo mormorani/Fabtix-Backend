@@ -115,9 +115,6 @@ app.get('/artist', authenticateToken, async (req, res) => {
   }
 });
 
-// const authRoute = require('./routes/auth');
-// app.use('/api/auths', authRoute);
-
 exports.api = functions.https.onRequest(app);
 
 // app.listen(3000, () => {
