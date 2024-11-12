@@ -35,13 +35,13 @@ The backend for Fabtix handles the core server-side logic, including performance
    - git clone https://github.com/mormorani/Fabtix-Backend.git
    - cd Fabtix-Backend
 2. **Install Dependencies**:
-    npm install
+   - npm install
 3. **Environment Variables**:
-    Create a .env file in the root directory with:
-    MONGODB_URI=your_mongo_connection_string
-    JWT_SECRET=your-jwt-secret
+   - Create a .env file in the root directory with:
+   -- MONGODB_URI=your_mongo_connection_string
+   -- JWT_SECRET=your-jwt-secret
 4. **Run the project**:
-    firebase emulators:start --only functions
+   - firebase emulators:start --only functions
 
 ### Deployment
 The project is deployed to Firebase Cloud Function. here: https://us-central1-fabtixapp.cloudfunctions.net/api. 
