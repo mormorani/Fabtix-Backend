@@ -38,8 +38,8 @@ The backend for Fabtix handles the core server-side logic, including performance
    - npm install
 3. **Environment Variables**:
    - Create a .env file in the root directory with:
-   -- MONGODB_URI=your_mongo_connection_string
-   -- JWT_SECRET=your-jwt-secret
+      - MONGODB_URI=your_mongo_connection_string
+      - JWT_SECRET=your-jwt-secret
 4. **Run the project**:
    - firebase emulators:start --only functions
 
