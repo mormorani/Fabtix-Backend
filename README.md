@@ -4,7 +4,7 @@ The backend for Fabtix handles the core server-side logic, including performance
 
 ## Table of Contents
 - [Features](#features)
-- [Tech Stack](#tech-stack)
+- [Tech Stack](#-tech-stack)
 - [Installation and Setup](#installation-and-setup)
 - [API Endpoints](#api-endpoints)
 - [Deployment](#deployment)
