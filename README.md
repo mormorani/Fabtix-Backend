@@ -47,24 +47,28 @@ The backend for Fabtix handles the core server-side logic, including performance
 The project is deployed to Firebase Cloud Function. here: https://us-central1-fabtixapp.cloudfunctions.net/api. 
 
 ## API Endpoints
-### Artist Routes
-GET /api/artists: Retrieves a list of all registered artists
-GET /api/artists/:name: Fetch an artist by their name (requires artist name in URL parameter).
-GET /api/artists/email: Fetch an artist by email (requires email in request body).
-### Performance Routes
-GET /api/performances: Retrieve a list of all performances with artist details.
-POST /api/performances/create: Create a new performance (requires JWT authentication).
-PUT /api/performances/:id: Update a performance by ID (requires JWT authentication).
-GET /api/performances/performances: Retrieve all performances for the logged-in artist (requires JWT authentication).
-GET /api/performances/:artistName: Retrieve performances by a specific artist’s name.
-### Performance Routes
-POST /api/purchases: Create a purchase record for a performance.
-### Review Routes
-POST /api/reviews: Create a review for a performance (requires valid purchase).
-GET /api/reviews/:performanceId: Retrieve all reviews for a specific performance.
-GET /api/reviews: Retrieve all reviews across all performances.
-### Authentication Routes
-POST /signup: Register a new artist (requires name, email, password, genre, image, and YouTube link in request body).
-POST /login: Authenticate an artist and return a JWT (requires email and password).
-GET /artist: Retrieve authenticated artist’s information (requires valid JWT in Authorization header).
 
+### Artist Routes
+- **GET /api/artists**: Retrieves a list of all registered artists.
+- **GET /api/artists/:name**: Fetch an artist by their name (requires artist name in URL parameter).
+- **GET /api/artists/email**: Fetch an artist by email (requires email in request body).
+
+### Performance Routes
+- **GET /api/performances**: Retrieve a list of all performances with artist details.
+- **POST /api/performances/create**: Create a new performance (requires JWT authentication).
+- **PUT /api/performances/:id**: Update a performance by ID (requires JWT authentication).
+- **GET /api/performances/performances**: Retrieve all performances for the logged-in artist (requires JWT authentication).
+- **GET /api/performances/:artistName**: Retrieve performances by a specific artist’s name.
+
+### Purchase Routes
+- **POST /api/purchases**: Create a purchase record for a performance.
+
+### Review Routes
+- **POST /api/reviews**: Create a review for a performance (requires valid purchase).
+- **GET /api/reviews/:performanceId**: Retrieve all reviews for a specific performance.
+- **GET /api/reviews**: Retrieve all reviews across all performances.
+
+### Authentication Routes
+- **POST /signup**: Register a new artist (requires name, email, password, genre, image, and YouTube link in request body).
+- **POST /login**: Authenticate an artist and return a JWT (requires email and password).
+- **GET /artist**: Retrieve authenticated artist’s information (requires valid JWT in Authorization header).
