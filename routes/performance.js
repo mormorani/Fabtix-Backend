@@ -34,7 +34,6 @@ router.post("/create", authenticateToken, async (req, res) => {
       date: req.body.date,
       location: req.body.location,
       price: req.body.price
-      // reviews: []
     });
 
     // Save the performance
@@ -54,9 +53,7 @@ router.put("/:id", authenticateToken, async (req, res) => {
   try {
 
     const performanceId = req.params.id;
-    console.log(performanceId);
     const artistId = req.artist.id; // Extracted from the JWT token by the middleware
-    console.log(artistId);
     // Validate input (you can add more validation as needed)
     if (!performanceId) {
       return res.status(400).json({ message: "Performance ID is required" });
@@ -91,7 +88,6 @@ router.put("/:id", authenticateToken, async (req, res) => {
 router.get("/performances", authenticateToken, async (req, res) => {
   try {
     const artistId = req.artist._id; // Get the artist ID from the authenticated token
-    console.log(artistId);
     if (!artistId) {
       return res.status(400).json({ message: "Artist ID is required" });
     }

@@ -7,12 +7,7 @@ const router = express.Router();
 // Route to create a review for a performance
 router.post("/", async (req, res) => {
   try {
-    // Log the incoming request body
-    console.log("Request Body:", req.body);
     const { performance, reviewerName, review, email } = req.body;
-
-     // Log the performance ID received
-     console.log("Performance ID:", performance);
 
     // Verify the performance exists
     const performanceExists = await PerformanceModel.findById(performance);
@@ -35,12 +30,8 @@ router.post("/", async (req, res) => {
       reviewerName,
       review,
     });
-
-     // Log the review to be saved
-     console.log("New Review Object:", newReview);
      
     const savedReview = await newReview.save();
-    console.log("Saved Review:", savedReview); // Log the saved review
     res
       .status(201)
       .json({ message: "Review submitted successfully", savedReview });

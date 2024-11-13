@@ -8,15 +8,9 @@ router.get("/", async (req, res) => {
     // Fetch all artists from the database
     const artists = await ArtistModel.find();
 
-    // Log the fetched artists for debugging
-    console.log(artists);
-
     // Send the artists array as JSON
     return res.send(artists); // or res.json(artists) - both are fine
   } catch (error) {
-    // Log the error for debugging
-    console.error("Error fetching artists:", error);
-
     // Send a 500 status code and error message
     return res.status(500).json({ error: "Internal Server Error" });
   }

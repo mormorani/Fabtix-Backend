@@ -12,7 +12,6 @@ const performanceSchema = new Schema(
     date: { type: Date, required: true },
     location: { type: String, required: true },
     price: { type: Number, required: true, min: 0 }, // Ensure price is non-negative
-    // reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "reviews" }], // Array of references to reviews
   },
   { versionKey: false }
 ); // Set versionKey property here

@@ -1,17 +1,30 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config();
-const mongoString = process.env.DATABASE_URL;
-console.log(mongoString);
-mongoose.connect(mongoString);
-const database = mongoose.connection;
-// const cookieParser = require('cookie-parser');
+const dotenv = require("dotenv");
 const cors = require("cors");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ArtistModel = require("./models/artistModel");
+
+// Load environment variables for local development
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
+
+// Determine if it's development or production
+const mongoString = process.env.NODE_ENV === 'production'
+    ? functions.config().database.url  // Firebase environment for production       
+    : process.env.DATABASE_URL;  // .env file for local development 
+
+
+console.log(mongoString);
+mongoose.connect(mongoString);
+const database = mongoose.connection;
+
+
 const { authenticateToken } = require('./middleware/authMiddleware'); // Adjust the path as needed
+
 
 database.on("error", (error) => {
   console.log(error);
@@ -20,9 +33,10 @@ database.on("error", (error) => {
 database.once("connected", () => {
   console.log("Database Connected");
 });
+
+// Create an Express app
 const app = express();
 
-// app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
@@ -115,8 +129,13 @@ app.get('/artist', authenticateToken, async (req, res) => {
   }
 });
 
+// Export the backend as Firebase function
 exports.api = functions.https.onRequest(app);
 
-// app.listen(3000, () => {
-//   console.log(`Server Started at ${3000}`);
-// });
+// Local server (for development)
+if (process.env.NODE_ENV !== 'production') {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Local server running on http://localhost:${port}`);
+  });
+}

@@ -9,9 +9,7 @@ const reviewSchema = new Schema(
       required: true,
     },
     reviewerName: { type: String, required: true },
-    // rating: { type: Number, required: true, min: 1, max: 5 },
     review: { type: String }
-    // date: { type: Date, default: Date.now },
   },
   { versionKey: false }
 ); // Set versionKey property here

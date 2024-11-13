@@ -8,8 +8,6 @@ router.post("/", async (req, res) => {
   try {
     const { performanceId, email } = req.body;
 
-    console.log(performanceId);
-    console.log(email);
     // Verify the performance exists
     const performanceExists = await PerformanceModel.findById(performanceId);
     if (!performanceExists) {
@@ -18,7 +16,6 @@ router.post("/", async (req, res) => {
 
     // Create a new purchase record
     const newPurchase = new PurchaseModel({
-    //   token: purchaseToken,
       performance: performanceId,
       userEmail: email,
     });
