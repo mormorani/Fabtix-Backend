@@ -64,10 +64,9 @@ Before you begin, ensure you have the following installed:
   DATABASE_URL=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<your-database-name>?retryWrites=true&w=majority
   ```
   JWT_SECRET: A secret key used for signing JWT tokens.
-
-```bash
-JWT_SECRET=your-secret-key
-```
+  ```bash
+  JWT_SECRET=your-secret-key
+  ```
 
 4. **Run the Project Locally**:
    ```bash
