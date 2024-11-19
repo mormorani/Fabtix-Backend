@@ -12,6 +12,10 @@ if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
 
+const jwtSecret = process.env.NODE_ENV === 'production' 
+    ? functions.config().jwt.secret // For production (from Firebase environment config)
+    : process.env.JWT_SECRET; // For development (from .env file or local environment)
+
 // Determine if it's development or production
 const mongoString = process.env.NODE_ENV === 'production'
     ? functions.config().database.url  // Firebase environment for production       
@@ -74,7 +78,7 @@ app.post('/signup', async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // Create a new artist with hashing the password
-      artist = new ArtistModel({ 
+      const newArtist = new ArtistModel({ 
         name, 
         email, 
         password: hashedPassword,
@@ -84,9 +88,25 @@ app.post('/signup', async (req, res) => {
       });
   
       // Save artist to the database
-      await artist.save();
+      const savedArtist = await newArtist.save();
+
+      console.log(savedArtist);
+      //await artist.save();
   
-      res.status(200).json({ message: 'Artist created successfully' });
+      // Generate JWT token with artist.id
+      const token = jwt.sign(
+        { id: savedArtist._id },
+        jwtSecret,
+        { expiresIn: '1h' }
+      );
+
+      res.status(201).json({
+        message: 'Artist registered successfully',
+        token,
+        savedArtist
+      });
+
+      //res.status(200).json({ message: 'Artist created successfully' });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
@@ -109,9 +129,9 @@ app.post('/login', async (req, res) => {
       }
 
       // Generate JWT token with artist.id
-      const accessToken = jwt.sign({ id: artist._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const accessToken = jwt.sign({ id: artist._id }, jwtSecret, { expiresIn: '1h' });
 
-      res.status(200).json({ message: 'Login successful', accessToken });
+      res.status(200).json({ message: 'Login successful', accessToken, artist });
   } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');

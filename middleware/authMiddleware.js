@@ -18,16 +18,33 @@ const authenticateToken = async (req, res, next) => {
   }
 
   try {
+    console.log("JWT Secret:", jwtSecret);
+    console.log("Token:", token);
+
     const decoded = jwt.verify(token, jwtSecret);
+    console.log("Decoded:", decoded);
+    
+    // console.log("Authentication try decode");
+    // console.log(jwtSecret);
+    // console.log(token);
+    // const decoded = jwt.verify(token, jwtSecret);
+    // console.log("decode: ");
+    // console.log(decoded);
     req.artistId = decoded.id; // Store the artist ID in the request
+    // console.log("backend authenticated: ");
+    // console.log(decoded.id);
     req.artist = await Artist.findById(req.artistId).select("-password");
 
     if (!req.artist) {
       return res.status(404).json({ msg: "Artist not found" });
     }
+    
+    console.log("Authenticated artist ID:", decoded.id);
     next();
   } catch (err) {
-    res.status(401).json({ msg: "Token is not valid" });
+    console.error("JWT Verification Error:", err.message);
+    return res.status(401).json({ msg: "Token is not valid" });
+    //res.status(401).json({ msg: "Token is not valid" });
   }
 };
 
