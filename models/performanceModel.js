@@ -3,7 +3,7 @@ const { Schema, model } = mongoose;
 
 const performanceSchema = new Schema(
   {
-    name: { type: String, required: false},
+    // name: { type: String, required: false},
     artist: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "artists",

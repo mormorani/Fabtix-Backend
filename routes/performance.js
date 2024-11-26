@@ -29,7 +29,7 @@ router.post("/create", authenticateToken, async (req, res) => {
 
     // Create a new performance
     const newPerformance = new PerformanceModel({
-      name: req.body.name,
+      // name: req.body.name,
       artist: artistId,
       date: req.body.date,
       location: req.body.location,
